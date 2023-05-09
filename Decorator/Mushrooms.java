@@ -1,14 +1,17 @@
+package Decorator;
+
 public class Mushrooms extends ToppingDecorator {
-    public Mushrooms(Pizza pizza) {
+    public Mushrooms(PizzaComponent pizza) {
         super(pizza);
     }
 
+    @Override
     public String getDescription() {
         return pizza.getDescription() + ", Mushrooms";
     }
 
-    public double cost() {
-        return pizza.cost() + 1.00;
+    @Override
+    public double getCost() {
+        return pizza.getCost() + 1.00;
     }
 }
-
