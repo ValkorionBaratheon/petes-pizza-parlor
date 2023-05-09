@@ -1,3 +1,13 @@
+import Builder.Pizza;
+import Command.Command;
+import Command.EatCommand;
+import Command.PayCommand;
+import Decorator.JalapenoPeppers;
+import Decorator.Mushrooms;
+import Decorator.Onions;
+import Decorator.Pepperoni;
+import Decorator.PizzaComponent;
+import Decorator.Sausage;
 import java.util.Scanner;
 
 public class PetePizzeria {
@@ -6,21 +16,23 @@ public class PetePizzeria {
         System.out.println("We pride ourselves in our long-standing pizza-making heritage. Once your mouth experiences this deliciousness, all other pizzas will be ruined or your money back!\n");
 
         Scanner scanner = new Scanner(System.in);
-        Pizza.PizzaBuilder pizzaBuilder = new Pizza.PizzaBuilder();
-        Pizza pizza;
+        Pizza.Builder pizzaBuilder;
+        PizzaComponent pizza;
 
         System.out.println("What kind of pizza would you like? (1: New York, 2: Extra Thin, 3: Deep Dish). Enter the number corresponding to your choice.");
         int choice = scanner.nextInt();
+        String pizzaStyle;
+        double basePrice = 10;
 
         switch (choice) {
             case 1:
-                pizzaBuilder.buildPizzaStyle("New York Style");
+                pizzaStyle = "New York Style";
                 break;
             case 2:
-                pizzaBuilder.buildPizzaStyle("Extra Thin Style");
+                pizzaStyle = "Extra Thin Style";
                 break;
             case 3:
-                pizzaBuilder.buildPizzaStyle("Deep Dish Style");
+                pizzaStyle = "Deep Dish Style";
                 break;
             default:
                 throw new IllegalArgumentException("Invalid choice.");
@@ -28,28 +40,31 @@ public class PetePizzeria {
 
         System.out.println("\nChoose your crust type: (1: Regular, 2: Gluten-Free)");
         choice = scanner.nextInt();
+        String crustType;
 
         if (choice == 1) {
-            pizzaBuilder.buildCrustType("Regular");
+            crustType = "Regular Crust";
         } else if (choice == 2) {
-            pizzaBuilder.buildCrustType("Gluten-Free");
+            crustType = "Gluten-Free Crust";
         } else {
             throw new IllegalArgumentException("Invalid choice.");
         }
 
         System.out.println("\nChoose your cheese type: (1: Mozzarella, 2: Provolone, 3: Cheddar)");
         choice = scanner.nextInt();
+        String cheeseType;
 
         if (choice == 1) {
-            pizzaBuilder.buildCheeseType("Mozzarella");
+            cheeseType = "Mozzarella Cheese";
         } else if (choice == 2) {
-            pizzaBuilder.buildCheeseType("Provolone");
+            cheeseType = "Provolone Cheese";
         } else if (choice == 3) {
-            pizzaBuilder.buildCheeseType("Cheddar");
+            cheeseType = "Cheddar Cheese";
         } else {
             throw new IllegalArgumentException("Invalid choice.");
         }
 
+        pizzaBuilder = new Pizza.Builder(pizzaStyle, crustType, cheeseType, basePrice);
         pizza = pizzaBuilder.build();
 
         System.out.println("\nChoose your toppings (Enter the number of the topping and press enter. Type '0' when done):");
@@ -86,6 +101,7 @@ public class PetePizzeria {
             System.out.println("\nPete walks out from the kitchen.");
             System.out.println("Pete: 'You got some mighty fine taste there, kid. We love a good " + pizza.getDescription() + ". That's my favorite too. Great minds think alike.'");
         } else {
+            System.out.println("\nPete walks out from the kitchen.");
             System.out.println("Pete: 'Get outta here! What, you too good for my pizza parlor? The youngsters these days. Sheesh!'");
         }
 

@@ -1,14 +1,17 @@
+package Decorator;
+
 public class Sausage extends ToppingDecorator {
-    public Sausage(Pizza pizza) {
+    public Sausage(PizzaComponent pizza) {
         super(pizza);
     }
 
+    @Override
     public String getDescription() {
         return pizza.getDescription() + ", Sausage";
     }
 
-    public double cost() {
-        return pizza.cost() + 1.50;
+    @Override
+    public double getCost() {
+        return pizza.getCost() + 1.00;
     }
 }
-
