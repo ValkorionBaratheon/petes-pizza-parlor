@@ -93,10 +93,8 @@ public class PetePizzeria {
         if (eat.equalsIgnoreCase(confirm[0])) {
             Command eatCommand = new EatCommand(pizza);
             eatCommand.execute();
-            //System.out.println("\nPete walks out from the kitchen.");
             System.out.println("\nPete: 'You got some mighty fine taste there, kid. I love me a good " + pizza.getDescription() + ". That's my favorite too!'");
         } else {
-            //System.out.println("\nPete walks out from the kitchen.");
             System.out.println("\nPete: 'Get outta here! What, you too good for my pizza parlor? The youngsters these days. Sheesh!'");
         }
 
