@@ -6,7 +6,7 @@ public class PetePizzeria {
         System.out.println("We pride ourselves in our long-standing pizza-making heritage. Once your mouth experiences this deliciousness, all other pizzas will be ruined or your money back!\n");
 
         Scanner scanner = new Scanner(System.in);
-        PizzaBuilder pizzaBuilder = new PizzaBuilder();
+        Pizza.PizzaBuilder pizzaBuilder = new Pizza.PizzaBuilder();
         Pizza pizza;
 
         System.out.println("What kind of pizza would you like? (1: New York, 2: Extra Thin, 3: Deep Dish). Enter the number corresponding to your choice.");
@@ -30,9 +30,9 @@ public class PetePizzeria {
         choice = scanner.nextInt();
 
         if (choice == 1) {
-            pizzaBuilder.buildCrustType("Regular Crust");
+            pizzaBuilder.buildCrustType("Regular");
         } else if (choice == 2) {
-            pizzaBuilder.buildCrustType("Gluten-Free Crust");
+            pizzaBuilder.buildCrustType("Gluten-Free");
         } else {
             throw new IllegalArgumentException("Invalid choice.");
         }
@@ -41,16 +41,16 @@ public class PetePizzeria {
         choice = scanner.nextInt();
 
         if (choice == 1) {
-            pizzaBuilder.buildCheeseType("Mozzarella Cheese");
+            pizzaBuilder.buildCheeseType("Mozzarella");
         } else if (choice == 2) {
-            pizzaBuilder.buildCheeseType("Provolone Cheese");
+            pizzaBuilder.buildCheeseType("Provolone");
         } else if (choice == 3) {
-            pizzaBuilder.buildCheeseType("Cheddar Cheese");
+            pizzaBuilder.buildCheeseType("Cheddar");
         } else {
             throw new IllegalArgumentException("Invalid choice.");
         }
 
-        pizza = pizzaBuilder.getPizza();
+        pizza = pizzaBuilder.build();
 
         System.out.println("\nChoose your toppings (Enter the number of the topping and press enter. Type '0' when done):");
         System.out.println("1: Mushrooms\n2: Onions\n3: Jalapeno Peppers\n4: Pepperoni\n5: Sausage");
@@ -95,11 +95,11 @@ public class PetePizzeria {
         if (pay.equalsIgnoreCase("yes")) {
             Command payCommand = new PayCommand(pizza);
             payCommand.execute();
-            System.out.println("\nPete: 'Now that's some honor, kid. You've made Ol' Pete proud. You were raises right. Here's a free New York cheesecake - on the house. You earned it, kid.'");
-            System.out.println("Thanks for choosing Pete's Pizza Parlor!");
+            System.out.println("\nPete: 'Now that's some honor, kid. You've made Ol' Pete proud. You were raised right. Here's a free New York cheesecake - on the house. You earned it, kid.'");
+            System.out.println("\nThanks for choosing Pete's Pizza Parlor!");
         } else {
             System.out.println("\nPete: 'You thief! Get back here you little punk! Sal, Paulie, Giovanni - teach this punk not to mess with Pete!'");
-            System.out.println("Pete's friends chased you down. They cornered you in an alley. You screamed for help, but it was too late. You died. You should've paid Pete.");
+            System.out.println("\nPete's friends chased you down. They cornered you in an alley. You screamed for help, but it was too late. You died. You should've paid Pete.");
         }
 
         scanner.close();
