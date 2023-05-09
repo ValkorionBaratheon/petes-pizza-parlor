@@ -12,17 +12,26 @@ import java.util.Scanner;
 
 public class PetePizzeria {
     public static void main(String[] args) {
-        System.out.println("\nWelcome to Pete's Pizza Parlor!");
-        System.out.println("We pride ourselves in our long-standing pizza-making heritage. Once your mouth experiences this deliciousness, all other pizzas will be ruined or your money back!\n");
-
-        Scanner scanner = new Scanner(System.in);
         Pizza.Builder pizzaBuilder;
         PizzaComponent pizza;
-
-        System.out.println("What kind of pizza would you like? (1: New York, 2: Extra Thin, 3: Deep Dish). Enter the number corresponding to your choice.");
-        int choice = scanner.nextInt();
+        int choice;
         String pizzaStyle;
-        double basePrice = 10;
+        String crustType;
+        String cheeseType;
+
+        System.out.println("\nWelcome to Pete's Pizza Parlor!");
+        System.out.println("We pride ourselves in our long-standing pizza-making heritage. Once your mouth experiences this deliciousness, all other pizzas will be ruined or your money back!");
+
+        Scanner scanner = new Scanner(System.in);
+
+
+        System.out.println("\nBefore you begin, the base price of a pizza is: $" + String.format("%.2f", Pizza.getBasePrice()));
+        System.out.println("\nWhat kind of pizza would you like? \n" +
+                            "1: New York \n" +
+                            "2: Extra Thin \n" +
+                            "3: Deep Dish \n" +
+                            "Enter the number corresponding to your choice.");
+        choice = scanner.nextInt();
 
         switch (choice) {
             case 1:
@@ -38,9 +47,10 @@ public class PetePizzeria {
                 throw new IllegalArgumentException("Invalid choice.");
         }
 
-        System.out.println("\nChoose your crust type: (1: Regular, 2: Gluten-Free)");
+        System.out.println("\nChoose your crust type: \n" +
+                            "1: Regular \n" + 
+                            "2: Gluten-Free");
         choice = scanner.nextInt();
-        String crustType;
 
         if (choice == 1) {
             crustType = "Regular Crust";
@@ -50,9 +60,11 @@ public class PetePizzeria {
             throw new IllegalArgumentException("Invalid choice.");
         }
 
-        System.out.println("\nChoose your cheese type: (1: Mozzarella, 2: Provolone, 3: Cheddar)");
+        System.out.println("\nChoose your cheese type: \n" +
+                            "1: Mozzarella \n" +
+                            "2: Provolone \n" +
+                            "3: Cheddar");
         choice = scanner.nextInt();
-        String cheeseType;
 
         if (choice == 1) {
             cheeseType = "Mozzarella Cheese";
@@ -64,12 +76,17 @@ public class PetePizzeria {
             throw new IllegalArgumentException("Invalid choice.");
         }
 
-        pizzaBuilder = new Pizza.Builder(pizzaStyle, crustType, cheeseType, basePrice);
+        pizzaBuilder = new Pizza.Builder(pizzaStyle, crustType, cheeseType);
         pizza = pizzaBuilder.build();
 
-        System.out.println("\nChoose your toppings (Enter the number of the topping and press enter. Type '0' when done):");
-        System.out.println("1: Mushrooms\n2: Onions\n3: Jalapeno Peppers\n4: Pepperoni\n5: Sausage");
-
+        System.out.println("\nChoose your toppings:");
+        System.out.println("1: Mushrooms ($" + String.format("%.2f", Mushrooms.getAdd()) + ")\n" +
+                           "2: Onions ($" + String.format("%.2f", Onions.getAdd()) + ")\n" +
+                           "3: Jalapeno Peppers ($" + String.format("%.2f", JalapenoPeppers.getAdd()) + ")\n" +
+                           "4: Pepperoni ($" + String.format("%.2f", Pepperoni.getAdd()) + ")\n" +
+                           "5: Sausage ($" + String.format("%.2f", Sausage.getAdd()) + ")\n" +
+                           "Enter the number of the topping you want and press enter. Type '0' when done.");
+        
         while (true) {
             choice = scanner.nextInt();
             if (choice == 0) {
@@ -85,27 +102,37 @@ public class PetePizzeria {
             } else if (choice == 5) {
                 pizza = new Sausage(pizza);
             } else {
-                System.out.println("Invalid choice. Please try again.");
+                System.out.println("Invalid choice. Please select one of the following integers: 1, 2, 3, 4, 5");
             }
+
+            System.out.println("Your current total is: $" + String.format("%.2f", pizza.getCost()));
         }
 
-        System.out.println("\nYour pizza has been made: " + pizza.getDescription());
+        System.out.println("\nGreat! Now that you have picked your toppings, your total is: $" + String.format("%.2f", pizza.getCost()));
+        System.out.println("Don't worry about it right now though. Pay us only after you've tried and loved your pizza!");
 
-        System.out.println("\nDo you want to eat your pizza now? (Type yes or no)");
-        scanner.nextLine(); // Consume newline left-over
+        System.out.println("\n30 minutes pass.");
+
+        System.out.println("\nPete walks out from the kitchen with a pizza in his hands.");
+        System.out.println("Your " + pizza.getDescription() + " pizza is ready!");
+
+        System.out.println("\nWould you like to eat your pizza now?");
+        System.out.println("Type 'yes' or 'no'");
+        scanner.nextLine();
         String eat = scanner.nextLine();
 
         if (eat.equalsIgnoreCase("yes")) {
             Command eatCommand = new EatCommand(pizza);
             eatCommand.execute();
-            System.out.println("\nPete walks out from the kitchen.");
-            System.out.println("Pete: 'You got some mighty fine taste there, kid. We love a good " + pizza.getDescription() + ". That's my favorite too. Great minds think alike.'");
+            //System.out.println("\nPete walks out from the kitchen.");
+            System.out.println("\nPete: 'You got some mighty fine taste there, kid. I love me a good " + pizza.getDescription() + ". That's my favorite too!'");
         } else {
-            System.out.println("\nPete walks out from the kitchen.");
-            System.out.println("Pete: 'Get outta here! What, you too good for my pizza parlor? The youngsters these days. Sheesh!'");
+            //System.out.println("\nPete walks out from the kitchen.");
+            System.out.println("\nPete: 'Get outta here! What, you too good for my pizza parlor? The youngsters these days. Sheesh!'");
         }
 
-        System.out.println("\nDo you want to pay for the pizza? (Type yes or no)");
+        System.out.println("\nWe hope you enjoyed your pizza! Would you like to pay for the pizza now? Your bill is $" + String.format("%.2f", pizza.getCost()) + ".");
+        System.out.println("Type 'yes' or 'no'");
         String pay = scanner.nextLine();
 
         if (pay.equalsIgnoreCase("yes")) {

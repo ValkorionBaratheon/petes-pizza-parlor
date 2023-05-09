@@ -1,8 +1,14 @@
 package Decorator;
 
 public class Onions extends ToppingDecorator {
+    private static final double ADD = 1.00;
+
     public Onions(PizzaComponent pizza) {
         super(pizza);
+    }
+
+    public static double getAdd() {
+        return ADD;
     }
 
     @Override
@@ -12,6 +18,6 @@ public class Onions extends ToppingDecorator {
 
     @Override
     public double getCost() {
-        return pizza.getCost() + 1.00;
+        return pizza.getCost() + ADD;
     }
 }
