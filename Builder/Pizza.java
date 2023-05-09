@@ -6,19 +6,19 @@ public class Pizza implements PizzaComponent{
     private String pizzaStyle;
     private String crustType;
     private String cheeseType;
-    private double cost;
+    public double cost;
+    private static final double BASE_PRICE = 10.00;
 
     public static class Builder {
         private String pizzaStyle;
         private String crustType;
         private String cheeseType;
-        private double cost;
+        private double cost = BASE_PRICE;
 
-        public Builder(String pizzaStyle, String crustType, String cheeseType, double cost) {
+        public Builder(String pizzaStyle, String crustType, String cheeseType) {
             this.pizzaStyle = pizzaStyle;
             this.crustType = crustType;
             this.cheeseType = cheeseType;
-            this.cost = cost;
         }
 
         public Builder pizzaStyle(String pizzaStyle) {
@@ -62,6 +62,10 @@ public class Pizza implements PizzaComponent{
 
     public String toString() {
         return pizzaStyle + " with " + crustType + " and " + cheeseType;
+    }
+
+    public static double getBasePrice() {
+        return BASE_PRICE;
     }
 
     @Override
