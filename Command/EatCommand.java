@@ -1,16 +1,14 @@
 package Command;
 
-import Decorator.PizzaComponent;
-
 public class EatCommand implements Command {
-    private PizzaComponent pizza;
+    private Customer customer;
 
-    public EatCommand(PizzaComponent pizza) {
-        this.pizza = pizza;
+    public EatCommand(Customer c) {
+        customer = c;
     }
 
     @Override
     public void execute() {
-        System.out.println("\nYou decided to eat your " + pizza.getDescription() + " pizza.");
+        customer.eatPizza();
     }
 }

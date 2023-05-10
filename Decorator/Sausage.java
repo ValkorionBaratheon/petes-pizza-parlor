@@ -1,7 +1,7 @@
 package Decorator;
 
 public class Sausage extends ToppingDecorator {
-    private static final double ADD = 1.00;
+    private static final double ADD = 2.50;
 
     public Sausage(PizzaComponent pizza) {
         super(pizza);
