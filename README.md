@@ -1,2 +1,2 @@
-# petes-pizza-parlor
- Fun pizza simulation
+# Pete's Pizza Parlor
+ Fun pizza ordering and dining simulation
