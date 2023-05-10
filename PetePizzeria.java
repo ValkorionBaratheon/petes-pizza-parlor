@@ -1,4 +1,6 @@
 import Builder.Pizza;
+import Command.Customer;
+import Command.Invoker;
 import Command.Command;
 import Command.EatCommand;
 import Command.PayCommand;
@@ -14,6 +16,8 @@ public class PetePizzeria {
     public static void main(String[] args) {
         Pizza.Builder pizzaBuilder;
         PizzaComponent pizza;
+        Invoker i;
+        Customer customer;
         int choice;
         String pizzaStyle;
         String crustType;
@@ -87,24 +91,30 @@ public class PetePizzeria {
         System.out.println("\nPete walks out from the kitchen with a pizza in his hands.");
         System.out.println("Your " + pizza.getDescription() + " pizza is ready!");
 
+        customer = new Customer(pizza);
+        Command e = new EatCommand(customer);
+        Command p = new PayCommand(customer);
+
         choice = getUserChoice("\nWould you like to eat your pizza now?", confirm, scanner);
         eat = confirm[choice - 1];
-
+        
         if (eat.equalsIgnoreCase(confirm[0])) {
-            Command eatCommand = new EatCommand(pizza);
-            eatCommand.execute();
-            System.out.println("\nPete: 'You got some mighty fine taste there, kid. I love me a good " + pizza.getDescription() + ". That's my favorite too!'");
+            i = new Invoker(e);
+            i.doCommand();
+            System.out.println("\nPete: 'You got some mighty fine taste there, kid. I love me a good " + customer.getDescription() + ". That's my favorite too!'");
+            System.out.println("\nWe hope you enjoyed your pizza! ");
         } else {
             System.out.println("\nPete: 'Get outta here! What, you too good for my pizza parlor? The youngsters these days. Sheesh!'");
+            System.out.println("\nWe hope you will enjoy your pizza later!");
         }
 
-        System.out.println("\nWe hope you enjoyed your pizza! Your bill is $" + String.format("%.2f", pizza.getCost()) + ".");
+        System.out.println("\nYour bill is $" + String.format("%.2f", customer.getCost()) + ".");
         choice = getUserChoice("\nWould you like to pay for the pizza now?", confirm, scanner);
         pay = confirm[choice - 1];
 
         if (pay.equalsIgnoreCase(confirm[0])) {
-            Command payCommand = new PayCommand(pizza);
-            payCommand.execute();
+            i = new Invoker(p);
+            i.doCommand();
             System.out.println("\nPete: 'Now that's some honor, kid. You've made Ol' Pete proud. You were raised right. Here's a free New York cheesecake - on the house. You earned it, kid.'");
             System.out.println("\nThanks for choosing Pete's Pizza Parlor!");
         } else {
