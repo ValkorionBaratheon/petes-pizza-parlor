@@ -13,7 +13,7 @@ public class Customer implements PizzaComponent{
         System.out.println("\nYou decided to eat your " + pizza.getDescription() + " pizza.");
     }
     public void payPete() {
-        System.out.println("\nYou paid $" + pizza.getCost() + " for your " + pizza.getDescription() + " pizza.");
+        System.out.println("\nYou paid $" + String.format("%.2f", pizza.getCost()) + " for your " + pizza.getDescription() + " pizza.");
     }
     
     @Override
