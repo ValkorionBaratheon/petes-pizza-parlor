@@ -116,10 +116,10 @@ public class PetePizzeria {
             i = new Invoker(p);
             i.doCommand();
             System.out.println("\nPete: 'Now that's some honor, kid. You've made Ol' Pete proud. You were raised right. Here's a free New York cheesecake - on the house. You earned it, kid.'");
-            System.out.println("\nThanks for choosing Pete's Pizza Parlor!");
+            System.out.println("\nThanks for choosing Pete's Pizza Parlor!\n");
         } else {
             System.out.println("\nPete: 'You thief! Get back here you little punk! Sal, Paulie, Giovanni - teach this punk not to mess with Pete!'");
-            System.out.println("\nPete's friends chased you down. They cornered you in an alley. You screamed for help, but it was too late. You died. You should've paid Pete.");
+            System.out.println("\nPete's friends chased you down. They cornered you in an alley. You screamed for help, but it was too late. You died. You should've paid Pete.\n");
         }
 
         scanner.close();

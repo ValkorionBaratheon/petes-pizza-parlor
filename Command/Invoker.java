@@ -1,7 +1,7 @@
 package Command;
 
 public class Invoker {
-    Command comm;
+    private Command comm;
     
     public Invoker(Command c) {
         comm = c;

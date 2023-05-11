@@ -6,7 +6,7 @@ public class Pizza implements PizzaComponent{
     private String pizzaStyle;
     private String crustType;
     private String cheeseType;
-    public double cost;
+    private double cost;
     private static final double BASE_PRICE = 10.00;
 
     public static class Builder {
